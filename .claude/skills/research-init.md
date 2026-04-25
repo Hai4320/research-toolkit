@@ -44,52 +44,50 @@ Record as `TARGET_LANG`. Default to user's conversation language if they say "sa
 
 ---
 
-## Step 0.5 — Project scale
+## Step 1 — Intent capture (single open question + inferred meta)
 
-Ask user the project's scale, since the toolkit can feel heavy for small projects:
+Ask the user **one open-ended question** (not a 4-question form):
 
-> Project scale?
-> - **Small / personal** — self-experiment, 1-2 cycles, ≤4 weeks. (e.g., "Should I switch to keto?")
-> - **Medium / serious** — multi-cycle research, 1-3 months, real consequences. (e.g., "Test whether AI side-projects are profitable.")
-> - **Large / sustained** — long-term project with multiple stakeholders, 3+ months. (e.g., "Build a domain-specific predictive model for production.")
+> Tell me about your research — what it's about, why you're doing it, what success looks like, any constraints (time/budget/expertise/data), and any prior work I should know about.
 
-Branch behavior:
-- **Small**: skip Step 5 (architecture design) entirely — process docs only. Step 9 only translates `templates/`, not `method/`. Step 6 (Cycle 0) abbreviated to a one-pager.
-- **Medium**: full flow.
-- **Large**: full flow + Step 5.5 add stakeholder list, also recommend setting up `architecture-review.md` cadence (every 4 cycles).
+User typically answers in 2-5 sentences, possibly partial. **Do NOT re-ask sub-questions one by one.** Parse what they said, then **infer** the rest with reasonable defaults.
 
-Record as `SCALE`. Use to tune subsequent steps.
+### Build intent summary + inferred meta
 
----
+Generate a 3-5 sentence written summary of intent. Then **infer four meta-attributes** with explicit reasoning:
 
-## Step 0.6 — Greenfield or retrofit?
+| Inferred | Default reasoning rules |
+|---|---|
+| `SCALE` ∈ {Small, Medium, Large} | Small if "personal experiment" / "weekend" / "self-test"; Large if multi-stakeholder / 6+ months / production stakes; Medium otherwise |
+| `MODE` ∈ {Greenfield, Retrofit} | Retrofit only if user mentions "existing project / channel / codebase / prior cycles". Default Greenfield |
+| `CONSTRAINTS` (time, budget, expertise) | Time default 5-10h/week if not stated; budget bootstrap; expertise infer from intent ("first time" = beginner, etc.) |
+| `LAYERS` (Single / Multi) | Multi if intent mentions distinct concerns (vd "research X AND build product AND grow audience"). Single otherwise |
 
-Ask whether this is a brand-new project or applying the toolkit to existing work:
+### State back + offer override
 
-> Is this a brand-new project, or are you retrofitting the toolkit onto existing work?
-> - **Greenfield** — empty directory, starting from scratch.
-> - **Retrofit** — existing project (code, data, prior cycles already done).
+Show user this format:
 
-Branch behavior:
-- **Greenfield**: continue normally to Step 1.
-- **Retrofit**: skip Step 5 (architecture design — already exists; instead schedule a `templates/architecture-review.md` audit as the first cycle's exit gate). Step 6 (Cycle 0) is replaced by a one-time "audit + document existing state" cycle. Then proceed to Step 7 with first new hypothesis.
+```
+Heard:
+[3-5 sentence intent summary]
 
-Record as `MODE`.
+Inferred meta (override anything wrong):
+• Scale: [Small/Medium/Large] — because [reason]
+• Mode: [Greenfield/Retrofit] — because [reason]
+• Time: ~[X]h/week — [stated/inferred]
+• Expertise: [beginner/intermediate/expert in domain] — [stated/inferred]
+• Layers: [Single / Multi (list layers)] — [reason]
 
----
+Anything wrong? Otherwise I'll continue.
+```
 
-## Step 1 — Intent capture
+User can override any field with one short message. **Do not iterate this step more than 2 turns** — if user pushes back twice, just accept whatever they say.
 
-Ask user (concisely, 4 questions max):
-
-1. **What is the research about?** (1-2 sentences, plain language — domain, object of study)
-2. **Why?** (desired outcome — knowledge / product / decision / income / something else)
-3. **What does success look like?** (concrete observable, e.g., "predict X with accuracy Y", "ship video that gets Z views", "decide whether to take job offer")
-4. **What constraints?** (time, budget, expertise, data availability)
-
-If the user has already explained intent in conversation history, summarize it back and ask for confirmation/correction instead of re-asking.
-
-**Output of this step**: a 3-5 sentence written summary of intent + constraints. Save to memory for next steps.
+**Branch behavior** based on inferred meta (apply silently in subsequent steps):
+- `SCALE=Small`: skip Step 5 (architecture); Step 9 translates `templates/` only.
+- `SCALE=Large`: add stakeholder section to charter; recommend `architecture-review.md` cadence (every 4 cycles).
+- `MODE=Retrofit`: skip Step 5; Step 6 becomes "audit existing state" cycle using `templates/architecture-review.md`.
+- `LAYERS=Multi`: Step 4 recommend per-layer methodology, not single global.
 
 ---
 
@@ -190,6 +188,28 @@ Ask user to confirm or adapt the structure. Don't generate files yet.
 
 > If MODE = Retrofit, this becomes "Cycle 0: audit existing state" instead of "setup". Use `templates/architecture-review.md` as the artifact.
 > If SCALE = Small, condense to a one-pager covering only the dimensions the user actually needs.
+
+### Step 6.0 — Choose Cycle 0 goal explicitly (NEW v2)
+
+Before drafting the plan, ask the user which Cycle 0 goal they want:
+
+> What's the goal of Cycle 0?
+> - **(a) Infra-only setup** — environment, dependencies, scaffolding. NO shippable artifact. End-state: pipeline can run a smoke test, but no real product output. (Best when: pure research, complex backend, no audience pressure yet.)
+> - **(b) MVP cycle** — produce a real shippable artifact end-to-end (even if rough), so you can self-evaluate quality before Cycle 1. (Best when: product/audience-driven projects, when you need to feel the pipeline working before iterating.)
+
+**Default heuristic** (state your guess + ask user to confirm):
+- `LAYERS=Multi` OR product/audience-driven intent (BMC/DBR archetypes) → default **(b) MVP cycle**.
+- Pure research / complex theoretical project → default **(a) infra-only**.
+- `MODE=Retrofit` → default **(audit)** — the variant of (a) for existing work.
+
+Record as `CYCLE0_GOAL` ∈ {infra, mvp, audit}.
+
+**Implication for the plan** (Step 6.1 below):
+- `infra`: Cycle 0 deliverable = "pipeline executes smoke test on sample input, no artifact for review".
+- `mvp`: Cycle 0 deliverable = "1 complete artifact (vd 1 short video, 1 working prediction, 1 prototype) suitable for self-quality eval. NOT public release — private review only."
+- `audit`: Cycle 0 deliverable = "filled `architecture-review.md` documenting existing state, identifying gaps for Cycle 1+."
+
+### Step 6.1 — Generate plan dimensions
 
 Generate a Cycle 0 plan covering these dimensions. Ask user to fill in or confirm each:
 
@@ -329,13 +349,14 @@ After all files generated, summarize:
 - [project skeleton paths]
 
 🌐 Target language: [TARGET_LANG]
-🧭 Methodology: [Falsificationist / ...]
-📏 Scale: [Small / Medium / Large]
-🆕 Mode: [Greenfield / Retrofit]
+🧭 Methodology: [Falsificationist / ... (per layer if Multi)]
+📏 Scale: [Small / Medium / Large] (inferred)
+🆕 Mode: [Greenfield / Retrofit] (inferred)
+🎯 Cycle 0 goal: [infra-only / mvp / audit]
 
 📋 Next steps:
 1. Review + approve DRAFT files
-2. Begin Cycle 0 (setup) — execute per cycle00_setup.md
+2. Begin Cycle 0 — execute per cycle00_setup.md
 3. When Cycle 0 closes, write cycle-review.md and update RESEARCH_HISTORY.md, begin Cycle 1
 
 🔁 To run cycle review or next-cycle planning, use the `research-cycle` skill (not yet installed).
@@ -348,13 +369,16 @@ After all files generated, summarize:
 - ❌ Generating all files in one shot without user confirmation
 - ❌ Picking methodology without showing comparison
 - ❌ Using "Falsificationist" for inherently audience-driven product work (use BMC or hybrid + warn user)
-- ❌ Letting user skip Cycle 0 (setup) and dive into Cycle 1 — Cycle 0 catches reproducibility bugs early (exception: SCALE=Small with explicit user override)
+- ❌ Letting user skip Cycle 0 and dive into Cycle 1 — Cycle 0 catches reproducibility bugs early (exception: SCALE=Small with explicit user override)
 - ❌ Forgetting RESEARCH_HISTORY.md — without it, project loses cycle memory
 - ❌ Modifying canonical English toolkit docs to translate — translation goes into the **user's project** at `research/methodology/`, not into the toolkit repo
 - ❌ Translating code blocks, file paths, or technical terms (i.i.d., p-value, etc.) — keep English
 - ❌ Asking for target language AFTER methodology choice — language is Step 0, before everything
 - ❌ Forcing Medium/Large flow on a Small personal experiment — calibrate by SCALE
-- ❌ Dropping all 11 steps into one message — walk through one step at a time
+- ❌ Dropping all steps into one message — walk through one step at a time
+- ❌ Re-asking sub-questions after user gave open-ended intent in Step 1 — INFER, state defaults, offer override
+- ❌ Defaulting Cycle 0 to "no shippable artifact" for product/audience-driven projects — ask explicitly per Step 6.0
+- ❌ Skipping the `LAYERS=Multi` recognition — per-layer methodology recommendation matters when intent has distinct concerns
 
 ## When to hand off
 
