@@ -1,6 +1,11 @@
 # Postmortem — [Strategy / research name]
 
 > A postmortem is an asset, not a shame. Purpose: future-you (and others) won't repeat this mistake, and will know how to leverage what was done well.
+>
+> **When to use this vs. [cycle-review.md](cycle-review.md)**:
+> - **Always** write `cycle-review.md` at every cycle close (regardless of outcome) — that is the lightweight neutral close artifact.
+> - **Additionally** write a postmortem when the cycle warrants **deeper failure analysis** — painful lessons, multiple traps fallen into, methodology bypass found, or cost-of-mistake high enough that future-you needs the long version. Postmortem complements cycle-review; it does not replace it.
+> - If the cycle closed cleanly with no major lessons, skip postmortem.
 
 **Date**: YYYY-MM-DD  
 **Author**: ...  

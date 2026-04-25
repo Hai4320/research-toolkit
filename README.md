@@ -30,7 +30,9 @@ research-toolkit/
 ├── templates/
 │   ├── charter.md               # Open a project: question + kill criteria
 │   ├── hypothesis.md            # Card to test 1 hypothesis
-│   └── postmortem.md            # When a strategy fails
+│   ├── cycle-review.md          # Neutral end-of-cycle review (every cycle)
+│   ├── postmortem.md            # Deeper failure analysis (when warranted)
+│   └── architecture-review.md   # Periodic project audit (drift, debt, methodology)
 ├── agents/
 │   └── rigor-reviewer.md        # Domain-agnostic reviewer agent
 ├── case-study/

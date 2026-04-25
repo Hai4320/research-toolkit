@@ -2,7 +2,7 @@
 
 > Before learning the process, you must internalize the underlying mindset. A process without the underlying mindset is just ritual.
 
-## Four foundational principles
+## Five foundational principles
 
 ### 1. Entropy is the default. Edge must be proven.
 
@@ -40,6 +40,32 @@ Many problems **cannot be predicted**, but you can still do well a different way
 - Health: there is no magic "biohack". But you can track systematically, eliminate wrong hypotheses, understand your own body better.
 
 When you cannot predict, **don't pretend you can**. Pivot to a different value you ACTUALLY create. See [05-reframing-pivot.md](05-reframing-pivot.md).
+
+### 5. The research process must always be fully documented.
+
+Documentation is not paperwork — it is the **substrate of accumulated knowledge**. A research effort without documentation is a private experience that dies with you, defaults to your in-the-moment mood, and cannot be audited, reproduced, or learned from.
+
+**Specifically, every cycle requires**:
+
+| Artifact | When | Purpose |
+|---|---|---|
+| **Charter** ([templates/charter.md](../templates/charter.md)) | Before cycle 1 / on major scope shift | Pre-commit research scope, success/kill criteria |
+| **Hypothesis card** ([templates/hypothesis.md](../templates/hypothesis.md)) | Per hypothesis, before validation | Pre-commit predictions, statistic, threshold |
+| **Cycle review** ([templates/cycle-review.md](../templates/cycle-review.md)) | At every cycle close, regardless of outcome | Neutral close artifact: result vs criteria, verdict, carry-over |
+| **Postmortem** ([templates/postmortem.md](../templates/postmortem.md)) | When cycle has painful lessons / multiple traps | Deeper failure analysis (complements cycle review, doesn't replace) |
+| **Cycle history** (`RESEARCH_HISTORY.md`) | Append-only on every cycle close | Project-wide chronological log; never rewrite |
+| **Architecture review** ([templates/architecture-review.md](../templates/architecture-review.md)) | Periodically (every N cycles, every quarter, before major refactor) | Audit drift, technical debt, methodology integration |
+
+**Rules of documentation discipline**:
+
+1. **Pre-commit before action**: charter + hypothesis card exist BEFORE data is touched. Editing them after seeing results = HARKing.
+2. **History is append-only**: `RESEARCH_HISTORY.md` and closure records never rewrite. New decisions append; old entries stay even when wrong (annotate with revision links).
+3. **Null results are first-class**: a closed cycle with "no edge found" is documented with the same rigor as a confirmed result. Without this, the project's null-rejection knowledge evaporates.
+4. **No silent refactors**: changing scope, methodology, architecture, or accepted result requires a written entry. Architectural reviews catch silent drift.
+5. **Documentation is verified at architecture review**: the [architecture-review.md](../templates/architecture-review.md) §10 documentation hygiene check is a structural enforcement of this principle.
+6. **One source of truth per fact**: don't duplicate methodology content into project-local docs — copy/symlink the toolkit.
+
+If you finish a cycle and have nothing written down, the cycle did not happen — its lessons are gone the moment your context window resets. The only proof that you did the work, and the only mechanism to learn from it, is the documentation you produced.
 
 ## Two mindsets to train
 

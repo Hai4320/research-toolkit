@@ -130,7 +130,7 @@ After Phase 4, you are in one of three states:
 - Deploy the strategy, **at small scale first** (paper trading / pilot).
 - Monitor live performance: does the edge survive, or was it just a good validation set?
 - Pre-commit **kill criteria**: if live performance drops below threshold X for N days, stop.
-- Write a postmortem **even on success** — record what went well to repeat it.
+- Write a [cycle-review.md](../templates/cycle-review.md) at close (always). Add a [postmortem.md](../templates/postmortem.md) only if the cycle warrants deeper failure analysis or the success had non-obvious lessons.
 
 ### B. Edge not confirmed → REFRAME
 
@@ -147,7 +147,7 @@ See [05-reframing-pivot.md](05-reframing-pivot.md) in detail.
 - Sample size too small, data not good enough, or wrong question. Write a status note documenting blockers, archive.
 - Set a **trigger** to revisit: "When 1 more year of data is available, reopen."
 
-**Final output**: postmortem file (see [templates/postmortem.md](../templates/postmortem.md)). This is the most valuable asset from each research effort.
+**Final output (every cycle, every outcome)**: a [cycle-review.md](../templates/cycle-review.md) entry — the lightweight neutral close artifact. Append a closure record to `RESEARCH_HISTORY.md`. Add a [postmortem.md](../templates/postmortem.md) only when deeper failure analysis is warranted. Periodically (every N cycles or before major refactor), run an [architecture-review.md](../templates/architecture-review.md). These artifacts together are the most valuable output from each research effort — see [01-philosophy.md §5](01-philosophy.md) on documentation discipline.
 
 ---
 
