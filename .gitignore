@@ -10,4 +10,8 @@ Thumbs.db
 
 # Local notes
 *.local.md
-.claude/
+
+# Claude Code: track skills + agents (sharable), ignore local state
+.claude/agent-memory/
+.claude/settings.local.json
+.claude/projects/
