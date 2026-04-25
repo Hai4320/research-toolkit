@@ -99,7 +99,7 @@ Each phase has clear **input**, **action**, **output**, and **stop criteria**.
 **Goal**: Find errors you cannot see.
 
 **Action**:
-1. Have a person (or an AI agent with adversarial prompt — see [agents/rigor-reviewer.md](../agents/rigor-reviewer.md)) review independently.
+1. Have a person (or an AI agent with adversarial prompt — see [.claude/agents/rigor-reviewer.md](../.claude/agents/rigor-reviewer.md)) review independently.
 2. The reviewer must:
    - **Have no incentive** to share your result (not a colleague on the same project).
    - **Have full access** to data, code, methodology.
@@ -115,7 +115,7 @@ Each phase has clear **input**, **action**, **output**, and **stop criteria**.
    - On a totally different subset (different geography, different year, different demographic), is it robust?
    - Does the edge survive **real costs**: transaction fees, taxes, slippage, friction?
 
-**Output**: Review report (see template in [agents/rigor-reviewer.md](../agents/rigor-reviewer.md)). Note clearly which concerns are resolved vs. unresolved.
+**Output**: Review report (see template in [.claude/agents/rigor-reviewer.md](../.claude/agents/rigor-reviewer.md)). Note clearly which concerns are resolved vs. unresolved.
 
 **Stop criterion**: All critical errors (per reviewer's definition) are fixed or accepted with explicit caveats.
 

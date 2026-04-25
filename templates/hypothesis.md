@@ -1,6 +1,8 @@
 # Hypothesis Card — [Short hypothesis name]
 
 > One card per hypothesis. Must be falsifiable: you must know which result will make you abandon it.
+>
+> **Filed at**: `research/cycles/cycleN_<short-topic>.md` — one card per cycle (the cycle's primary hypothesis). Additional sub-hypotheses go in the same file or in `research/cycles/cycleN_<topic>_H[2,3,...].md`.
 
 **ID**: H_xxx  
 **Date created**: YYYY-MM-DD  

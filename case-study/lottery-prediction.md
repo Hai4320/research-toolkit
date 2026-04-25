@@ -71,7 +71,7 @@ A `rigor-reviewer` adversarial-prompt agent (Claude-based) was added with mandat
 - Evaluate multiple-comparison correction.
 - Warn if strategy promotes harmful gambling behavior.
 
-The rigor-reviewer in this toolkit ([agents/rigor-reviewer.md](../agents/rigor-reviewer.md)) is the **domain-agnostic version** of that agent — generalized for any field.
+The rigor-reviewer in this toolkit ([.claude/agents/rigor-reviewer.md](../.claude/agents/rigor-reviewer.md)) is the **domain-agnostic version** of that agent — generalized for any field.
 
 → **Lesson**: An adversarial reviewer (human or AI) is the most valuable investment in research. Without it, confirmation bias goes unchecked.
 
@@ -123,7 +123,7 @@ For the lottery / random-number domain, add to the fallacy list:
 ## Reusable patterns from the project
 
 - **Walk-forward backtest framework**: pattern usable for any predictive strategy.
-- **Adversarial reviewer agent**: generalized as [agents/rigor-reviewer.md](../agents/rigor-reviewer.md).
+- **Adversarial reviewer agent**: generalized as [.claude/agents/rigor-reviewer.md](../.claude/agents/rigor-reviewer.md).
 - **UX-first reframing pattern**: rewriting jargon → friendly language when pivoting from "tool with edge" to "conscious-entertainment tool". This pattern applies to any product whose positioning shifts.
 - **This toolkit**.
 

@@ -6,6 +6,8 @@
 > - **Always** write `cycle-review.md` at every cycle close (regardless of outcome) — that is the lightweight neutral close artifact.
 > - **Additionally** write a postmortem when the cycle warrants **deeper failure analysis** — painful lessons, multiple traps fallen into, methodology bypass found, or cost-of-mistake high enough that future-you needs the long version. Postmortem complements cycle-review; it does not replace it.
 > - If the cycle closed cleanly with no major lessons, skip postmortem.
+>
+> **Filed at**: `research/cycles/cycleN_<short-topic>-postmortem.md` — sibling of the cycle's hypothesis card and review. Cross-link from `RESEARCH_HISTORY.md` closure record.
 
 **Date**: YYYY-MM-DD  
 **Author**: ...  

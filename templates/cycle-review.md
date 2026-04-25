@@ -1,6 +1,8 @@
 # Cycle Review — Cycle [N] · [topic]
 
 > Run this at every cycle close, regardless of outcome. Lighter than [postmortem.md](postmortem.md). Postmortem is reserved for cycles where deeper failure analysis is warranted (lessons painful enough to write at length).
+>
+> **Filed at**: `research/cycles/cycleN_<short-topic>-review.md` — sibling of the cycle's hypothesis card. Append the §7 closure record block to `research/RESEARCH_HISTORY.md` after filling in.
 
 **Cycle ID**: N  
 **Date opened**: YYYY-MM-DD  
@@ -106,5 +108,5 @@ Otherwise leave blank — open the planning conversation separately.
 
 ---
 
-**Reviewed by**: ... (self / peer / [rigor-reviewer agent](../agents/rigor-reviewer.md))  
+**Reviewed by**: ... (self / peer / [rigor-reviewer agent](../.claude/agents/rigor-reviewer.md))  
 **Approved by**: ... (project owner)

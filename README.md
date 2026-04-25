@@ -16,6 +16,63 @@ Use it when your work has **any** of these traits:
 
 You do NOT need this when: the work is fully deterministic, already well-validated, or risk is so low that "just try it" is cheaper than research.
 
+## Quickstart (5 minutes)
+
+Pick the option that matches you.
+
+**A. I just want a single template now** — clone the repo or browse on GitHub, copy [templates/charter.md](templates/charter.md), fill it in. Done. You can ignore everything else until you need it.
+
+**B. I want the full guided setup with Claude Code** — install the toolkit in your project (see "Install in your project" below), then run:
+
+```
+> bắt đầu nghiên cứu mới        # in your project directory (Vietnamese)
+> start a new research project   # or English
+```
+
+The `research-init` skill walks you through 11 steps in a few minutes.
+
+**C. I want to read the methodology first** — start with [method/01-philosophy.md](method/01-philosophy.md) (5 principles, ~5 min), then [method/02-workflow.md](method/02-workflow.md) (the 5-phase process). The other docs (`03-fallacies.md`, `04-validation.md`, `05-reframing-pivot.md`) are reference, read on demand.
+
+## Install in your project
+
+The toolkit content (`method/`, `templates/`, `agents/`) needs to be accessible from your project so the skill (and you) can read it. Three options:
+
+### Option 1 — Git submodule (recommended for serious projects)
+
+```bash
+cd your-project/
+git submodule add https://github.com/Hai4320/research-toolkit research/methodology
+mkdir -p .claude/skills
+cp research/methodology/.claude/skills/research-init.md .claude/skills/
+cp -r research/methodology/.claude/agents .claude/   # optional, for the rigor-reviewer agent
+```
+
+The skill auto-detects the submodule at `research/methodology/`.
+
+### Option 2 — Sibling clone (lightest)
+
+```bash
+git clone https://github.com/Hai4320/research-toolkit ~/research-toolkit
+mkdir -p .claude/skills
+cp ~/research-toolkit/.claude/skills/research-init.md .claude/skills/
+```
+
+The skill auto-detects the clone at `~/research-toolkit/`.
+
+### Option 3 — Copy snapshot (no link to upstream)
+
+```bash
+git clone https://github.com/Hai4320/research-toolkit /tmp/rt
+mkdir -p .claude/skills .claude/agents
+cp -r /tmp/rt/method /tmp/rt/templates /tmp/rt/agents .
+cp /tmp/rt/.claude/skills/research-init.md .claude/skills/
+cp /tmp/rt/.claude/agents/rigor-reviewer.md .claude/agents/   # optional
+```
+
+The skill detects toolkit content at the repo root.
+
+> **Verifying the install**: from your project, run `ls templates/charter.md` (Option 3) or `ls research/methodology/templates/charter.md` (Option 1). If found, the skill will work.
+
 ## Folder structure
 
 ```
@@ -33,13 +90,13 @@ research-toolkit/
 │   ├── cycle-review.md          # Neutral end-of-cycle review (every cycle)
 │   ├── postmortem.md            # Deeper failure analysis (when warranted)
 │   └── architecture-review.md   # Periodic project audit (drift, debt, methodology)
-├── agents/
-│   └── rigor-reviewer.md        # Domain-agnostic reviewer agent
 ├── case-study/
 │   └── lottery-prediction.md    # Anonymized applied example
 └── .claude/
-    └── skills/
-        └── research-init.md     # Bootstrap a new project (interactive, multilingual)
+    ├── skills/
+    │   └── research-init.md     # Bootstrap a new project (interactive, multilingual)
+    └── agents/
+        └── rigor-reviewer.md    # Domain-agnostic reviewer agent (Claude Code agent)
 ```
 
 ## Two ways to use the toolkit
@@ -49,7 +106,7 @@ research-toolkit/
 1. **Before starting** a research effort: copy [templates/charter.md](templates/charter.md) → fill it in → commit to kill criteria.
 2. **Per hypothesis**: use [templates/hypothesis.md](templates/hypothesis.md), one card per hypothesis.
 3. **When you catch yourself wanting to believe**: re-read [method/03-fallacies.md](method/03-fallacies.md), self-check.
-4. **Before publishing / shipping to production**: run it through [agents/rigor-reviewer.md](agents/rigor-reviewer.md) — or have a person (or Claude with this prompt) review.
+4. **Before publishing / shipping to production**: run it through [.claude/agents/rigor-reviewer.md](.claude/agents/rigor-reviewer.md) — or have a person (or Claude with this prompt) review.
 5. **When a strategy fails**: write [templates/postmortem.md](templates/postmortem.md). It is an asset — not wasted failure.
 6. **When you hit "this can't be predicted"**: [method/05-reframing-pivot.md](method/05-reframing-pivot.md) shows how to pivot.
 

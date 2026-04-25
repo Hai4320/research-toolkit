@@ -3,6 +3,8 @@
 > Periodic audit of the project's overall architecture. Run at milestone boundaries (every N cycles, every quarter, or before any major refactor). Independent of single-cycle reviews.
 >
 > Goal: catch drift between original goals and current state, surface technical debt, validate that methodology is still structurally enforced in code.
+>
+> **Filed at**: `research/architecture-reviews/YYYY-MM-DD-v[N].md` — append-only series, never rewrite past reviews. Each new review links to the previous one in §1.
 
 **Review date**: YYYY-MM-DD  
 **Review version**: N  
@@ -78,7 +80,7 @@ If drift exists:
 | Walk-forward backtest | `method/04-validation.md` | Time-aware split enforced in code? | ✓/✗ |
 | Multiple-comparison correction | `method/04-validation.md` | FWER applied in evaluator? | ✓/✗ |
 | MC null baseline | `method/04-validation.md` | MC null library exists + used? | ✓/✗ |
-| Adversarial review | `agents/rigor-reviewer.md` | Run before each cycle close? | ✓/✗ |
+| Adversarial review | `.claude/agents/rigor-reviewer.md` | Run before each cycle close? | ✓/✗ |
 | Cycle history append-only | (skill) | Discipline only / hooks enforce? | ✓/✗ |
 
 **Gates failing**: ... (these become refactor priorities)
@@ -190,5 +192,4 @@ Pre-commit when this review will run again (don't leave open-ended):
 
 ---
 
-**Approved by**: ... (project owner)  
-**Filed at**: `research/architecture-reviews/YYYY-MM-DD-v[N].md`
+**Approved by**: ... (project owner)

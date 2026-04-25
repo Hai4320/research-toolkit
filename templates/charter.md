@@ -1,6 +1,8 @@
 # Research Charter — [Project Name]
 
 > Fill in this template BEFORE starting research. Purpose: pre-commit to prevent HARKing and optional stopping. When done, save in a timestamped location (git commit, or dated file).
+>
+> **Filed at**: `research/charter.md` — one charter per project. Subsequent versions append to the change log at the bottom; do not rewrite history.
 
 **Date created**: YYYY-MM-DD  
 **Author**: ...  
